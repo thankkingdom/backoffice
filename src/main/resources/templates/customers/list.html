@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+<meta charset="UTF-8">
 <title>顧客一覧</title>
 </head>
 <body>
     <div layout:fragment="content" class="col-sm-12">
+        ようこそ！ <span sec:authentication="principal.user.username">system</span>さん
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" class="btn btn-default btn-xs" value="ログアウト">
+        </form>
         <form th:action="@{/customers/create}" th:object="${customerForm}" method="post">
             <fieldset>
                 <legend>顧客情報作成</legend>
@@ -42,12 +48,14 @@
                 <th>ID</th>
                 <th>姓</th>
                 <th>名</th>
+                <th>担当者</th>
                 <th colspan="2">編集</th>
             </tr>
             <tr th:each="customer: ${customers}">
                 <td th:text="${customer.id}">100</td>
                 <td th:text="${customer.lastName}">山田</td>
                 <td th:text="${customer.firstName}">太郎</td>
+                <td th:text="${customer.user.username}">System</td>
                 <td>
                     <form th:action="@{/customers/edit}" method="get">
                         <input type="submit" name="form" value="編集" />

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.example.backoffice.entity.Customer;
+import com.example.backoffice.entity.User;
 import com.example.backoffice.repository.CustomerRepository;
 
 @Service
@@ -22,12 +23,13 @@ public class CustomerService {
 
 	public List<Customer> findAll() {
 		// return customerRepository.findAllExt();
-		return customerRepository.findByOrderByIdAsc();
+		//return customerRepository.findByOrderByIdAsc();
+		return customerRepository.findAllWithUserOrderByName();
 	}
 
-	public void create(Customer customer) {
-		// TODO Auto-generated method stub
-
+	public Customer create(Customer customer, User user) {
+		customer.setUser(user);
+		return customerRepository.save(customer);
 	}
 
 	public Optional<Customer> findOne(Integer id) {
@@ -38,8 +40,9 @@ public class CustomerService {
 		return customerRepository.findOne(example);
 	}
 
-	public void update(Customer customer) {
-		customerRepository.save(customer);
+	public Customer update(Customer customer, User user) {
+		customer.setUser(user);
+		return customerRepository.save(customer);
 	}
 
 	public void delete(Integer id) {

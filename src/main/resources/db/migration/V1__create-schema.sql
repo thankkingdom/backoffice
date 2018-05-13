@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS universe.customer;
+DROP TABLE IF EXISTS universe.customers;
 
-CREATE TABLE universe.customer
+CREATE TABLE universe.customers
 (
     id bigserial NOT NULL,
     first_name character varying(30),
@@ -8,5 +8,5 @@ CREATE TABLE universe.customer
     CONSTRAINT customer_pkey PRIMARY KEY (id)
 );
 
-ALTER TABLE universe.customer
+ALTER TABLE universe.customers
     OWNER to admin;

@@ -17,4 +17,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	public List<Customer> findByOrderByIdAsc();
 
 	public List<Customer> findAllExt();
+	
+	@Query("SELECT DISTINCT x FROM Customer x JOIN FETCH x.user ORDER BY x.firstName, x.lastName")
+	List<Customer> findAllWithUserOrderByName();
 }
