@@ -1,8 +1,10 @@
 package com.example.backoffice.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.example.backoffice.entity.Customer;
@@ -13,18 +15,36 @@ public class CustomerService {
 
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	public Customer save(Customer customer) {
 		return customerRepository.save(customer);
 	}
-	
+
 	public List<Customer> findAll() {
-		return customerRepository.findAll();
+		// return customerRepository.findAllExt();
+		return customerRepository.findByOrderByIdAsc();
 	}
 
 	public void create(Customer customer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	public Optional<Customer> findOne(Integer id) {
+		Customer c = new Customer();
+		c.setId(id);
+
+		Example<Customer> example = Example.of(c);
+		return customerRepository.findOne(example);
+	}
+
+	public void update(Customer customer) {
+		customerRepository.save(customer);
+	}
+
+	public void delete(Integer id) {
+		Customer customer = new Customer();
+		customer.setId(id);
+		customerRepository.delete(customer);
+	}
 }

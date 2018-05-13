@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+	http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+
+	<entity class="com.example.backoffice.entity.Customer">
+		<named-native-query name="Customer.findAllExt"
+			result-class="com.example.backoffice.entity.Customer">
+			<query><![CDATA[
+			SELECT
+				*
+			FROM
+				delivery.customer
+			ORDER BY
+				id
+			]]></query>
+		</named-native-query>
+	</entity>
+
+</entity-mappings>
