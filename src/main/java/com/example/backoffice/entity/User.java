@@ -35,4 +35,11 @@ public class User {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
 	private List<Customer> customer;
+	
+	@Column
+	private boolean systemUserFlag;
+	
+	@Column
+	private boolean adminUserFlag;
+	
 }

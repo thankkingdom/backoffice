@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +41,7 @@ public class CustomerController {
 		return "customers/list";
 	}
 
+	@PreAuthorize("hasAnyRole('SYSTEM', 'ADMIN')")
 	@PostMapping(path = "create")
 	String create(@Validated CustomerForm form, BindingResult result, Model model,
 			@AuthenticationPrincipal LoginUserDetails userDetails) {
