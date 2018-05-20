@@ -3,6 +3,7 @@ package com.example.backoffice.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -16,21 +17,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Entity
+@Table(schema = "universe", name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(schema = "universe", name = "users")
-@ToString(exclude = "customers")
+@ToString(exclude = "customer")
 public class User {
 
 	@Id
 	private String username;
 
 	@JsonIgnore
+	@Column(name="encoded_password")
 	private String encodedPassword;
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-	private List<Customer> customers;
+	private List<Customer> customer;
 }

@@ -1,4 +1,4 @@
-package com.example.backoffice.controller;
+package com.example.backoffice.app;
 
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 

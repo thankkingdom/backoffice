@@ -22,7 +22,7 @@ public class CustomerService {
 	}
 
 	public List<Customer> findAll() {
-		// return customerRepository.findAllExt();
+		//return customerRepository.findAllExt();
 		//return customerRepository.findByOrderByIdAsc();
 		return customerRepository.findAllWithUserOrderByName();
 	}
