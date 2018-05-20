@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.backoffice.entity.Customer;
@@ -49,5 +51,9 @@ public class CustomerService {
 		Customer customer = new Customer();
 		customer.setId(id);
 		customerRepository.delete(customer);
+	}
+	
+	public Page<Customer> search(Pageable pageable) {
+		return customerRepository.findAll(pageable);
 	}
 }

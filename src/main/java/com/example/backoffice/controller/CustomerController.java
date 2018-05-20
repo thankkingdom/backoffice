@@ -1,10 +1,12 @@
 package com.example.backoffice.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -35,9 +37,18 @@ public class CustomerController {
 	}
 
 	@GetMapping
-	String list(Model model) {
-		List<Customer> customers = customerService.findAll();
-		model.addAttribute("customers", customers);
+	String list(Model model, Pageable pageable) {
+		// List<Customer> customers = customerService.findAll();
+		// model.addAttribute("customers", customers);
+
+		if(!Optional.ofNullable(pageable).isPresent()) {
+			pageable = PageRequest.of(0, 5);
+		}
+		
+		Page<Customer> page = customerService.search(pageable);
+		model.addAttribute("page", page);
+		model.addAttribute("customers", page.getContent());
+
 		return "customers/list";
 	}
 
@@ -46,7 +57,8 @@ public class CustomerController {
 	String create(@Validated CustomerForm form, BindingResult result, Model model,
 			@AuthenticationPrincipal LoginUserDetails userDetails) {
 		if (result.hasErrors()) {
-			return list(model);
+			return list(model, null);
+
 		}
 		Customer customer = new Customer();
 		BeanUtils.copyProperties(form, customer);
