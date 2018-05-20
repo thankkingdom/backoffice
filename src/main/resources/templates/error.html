@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>エラー画面</title>
+<link rel="stylesheet" type="text/css"
+    href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+    href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}" />
+</head>
+<body class="container" style="width: 100%; display: flex; justify-content: center;">
+
+    <div>
+        <div class="card" style="width: 18rem; border: 2px;">
+            <div class="card-body">
+                <h5 class="card-title" style="">エラー画面</h5>
+                <hr>
+                <p class="card-text text-danger">エラーが発生しました。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.jp}"></script>
+</body>
+</html>
