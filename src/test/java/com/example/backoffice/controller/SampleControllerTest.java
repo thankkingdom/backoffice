@@ -2,7 +2,6 @@ package com.example.backoffice.controller;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -14,10 +13,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.example.backoffice.service.LoginUserDetails;
 import com.example.backoffice.service.LoginUserDetailsService;
@@ -26,7 +23,7 @@ import com.example.backoffice.service.LoginUserDetailsService;
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)
 @AutoConfigureMockMvc
-public class CustomerControllerTest {
+public class SampleControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -35,39 +32,17 @@ public class CustomerControllerTest {
 	private LoginUserDetailsService loginUserDetailsService;
 
 	@Test
-	public void testList() throws Exception {
+	public void index() throws Exception {
 
 		LoginUserDetails userDetails = (LoginUserDetails) loginUserDetailsService.loadUserByUsername("admin1");
 
 		//@formatter:off
-		mockMvc.perform(get("http://localhost:8080/customers")
+		mockMvc.perform(get("http://localhost:8080/sample/")
 			.contentType(MediaType.TEXT_HTML)
 			.with(SecurityMockMvcRequestPostProcessors.csrf())
 			.with(user(userDetails))
 		)
-		.andExpect(SecurityMockMvcResultMatchers.authenticated())
 		.andExpect(status().is2xxSuccessful());
-		//@formatter:on
-	}
-
-	@Test
-	public void test() throws Exception {
-
-		LoginUserDetails userDetails = (LoginUserDetails) loginUserDetailsService.loadUserByUsername("admin1");
-
-		//@formatter:off
-		mockMvc.perform(post("http://localhost:8080/customers/create")
-			.contentType(MediaType.TEXT_HTML)
-			.with(SecurityMockMvcRequestPostProcessors.csrf())
-			.with(user(userDetails))
-			.param("firstName", "太郎")
-			.param("lastName", "山田")
-		)
-		//.andDo(print())
-		.andExpect(SecurityMockMvcResultMatchers.authenticated())
-		.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-		.andExpect(MockMvcResultMatchers.redirectedUrl("/customers"))
-		.andReturn();
 		//@formatter:on
 	}
 }
