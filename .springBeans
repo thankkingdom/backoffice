@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.example.backoffice.app.DemoApplication</config>
+		<config>java:com.example.backoffice.DemoApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
