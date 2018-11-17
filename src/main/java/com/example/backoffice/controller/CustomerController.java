@@ -41,10 +41,10 @@ public class CustomerController {
 		// List<Customer> customers = customerService.findAll();
 		// model.addAttribute("customers", customers);
 
-		if(!Optional.ofNullable(pageable).isPresent()) {
+		if (!Optional.ofNullable(pageable).isPresent()) {
 			pageable = PageRequest.of(0, 5);
 		}
-		
+
 		Page<Customer> page = customerService.search(pageable);
 		model.addAttribute("page", page);
 		model.addAttribute("customers", page.getContent());

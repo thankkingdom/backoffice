@@ -1,4 +1,4 @@
-package com.example.backoffice.app;
+package com.example.backoffice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
